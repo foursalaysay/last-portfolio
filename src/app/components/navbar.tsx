@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 
 import {
@@ -7,6 +9,8 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
+
+  import { AlignJustify } from 'lucide-react';
 
   
 export default function Header() {
@@ -24,13 +28,12 @@ export default function Header() {
         }
       };
   return (
-    <div className='w-screen h-20 justify-between'>
+    <div className='w-screen h-32 flex flex-row justify-between px-5'>
         {/* LOGO HERE */}
-        <h1>JK</h1>
         <div >
         <Select>
-            <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Theme" />
+            <SelectTrigger className='w-[150px] mr-10'> 
+                <AlignJustify />
             </SelectTrigger>
             <SelectContent id='themeSelector' onChange={scrollToSection}>
                 <SelectItem value="light">Pros</SelectItem>

@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Header from "./components/navbar";
 
 export default function Home() {
   return (
     <div>
-        <h1>Hello Wordl</h1>
+        <Header />
     </div>
   );
 }
