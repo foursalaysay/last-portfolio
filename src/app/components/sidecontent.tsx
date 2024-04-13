@@ -1,7 +1,12 @@
-import React from 'react';
-import { GraduationCap, Cpu, CodeXml, FolderGit2, LucideIcon } from 'lucide-react';
 
-import { Link, animateScroll as scroll } from "react-scroll";
+import React, { useState, useEffect } from 'react';
+import { GraduationCap, Cpu, Binary , FolderGit2, LucideIcon } from 'lucide-react';
+
+import { Link } from "react-scroll";
+import { motion } from 'framer-motion'
+import { Secular_One } from 'next/font/google';
+
+
 
 export interface sideCProps {
   sideCProps: sideCType[];
@@ -30,7 +35,7 @@ const sidecons: sideCType[] = [
   {
     id: 3,
     sideC: 'Skills',
-    DashIcon: CodeXml,
+    DashIcon: Binary ,
     secName :"section-3"
   },
   {
@@ -42,32 +47,47 @@ const sidecons: sideCType[] = [
 ];
 
 export default function SideContent() {
+
+  const [ activeLink, setActiveLink ] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Set the first link as active when the component mounts
+    setActiveLink(sidecons[0].secName);
+  }, []);
+
+  const handleClick  = (secName : string ) => {
+    setActiveLink(secName)
+  }
   return (
-      <div className="flex flex-col items-start justify-center p-10">
-        {sidecons.map(({ id, sideC, DashIcon, secName }) => (
-        // activeClass="active"
-        // to="section1"
-        // spy={true}
-        // smooth={true}
-        // offset={-70}
-        // duration={500}
-         
-         
-             <Link
-             key={id}
-             to={secName}
-             spy={true}
-             smooth={true}
-             offset={-70}
-             duration={500}
-             className="flex flex-row h-10 gap-3 bg-transparent items-center hover:bg-gray-200 p-1 w-3/4 rounded-lg cursor-pointer" 
-             >
-            <DashIcon size={20} />
-            <h5 className='font-semibold text-sm'>{sideC}</h5>
-            </Link>
+    <div className="flex flex-col items-start justify-center p-10 gap-3">
+      {sidecons.map(({ id, sideC, DashIcon, secName }) => (
+        <motion.div 
+        key={id} className="flex flex-row h-10 w-full" whileHover={{x : 20}}>
           
-          
-        ))}
-      </div>
+          <Link
+          to={secName}
+          spy={true}
+          smooth={true}
+          offset={-70}
+          duration={500}
+          activeClass="active" // Apply the active class when the link is active
+          className={`flex flex-row h-full bg-transparent gap-2 items-center p-1 w-full rounded-lg cursor-pointer border-l-4 ${secName === activeLink ? 'border-sky-500' : 'border-transparent'} pl-2`}
+          onClick={() => handleClick(secName)}
+            // to={secName}
+            // spy={true}
+            // smooth={true}
+            // offset={-70}
+            // duration={500}
+            // className="flex flex-row h-full bg-transparent items-center hover:bg-gray-200 p-1 w-full rounded-lg cursor-pointer"
+            //  // Apply hover effect using Framer Motion directly to the Link
+          >
+           
+                <DashIcon size={20} />
+                <h5 className='font-semibold text-sm'>{sideC}</h5>
+              
+          </Link>
+        </motion.div>
+      ))}
+    </div> 
   );
 }
