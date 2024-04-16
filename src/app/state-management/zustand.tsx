@@ -1,12 +1,13 @@
 'use client'
 
-import { create } from 'zustand';
+import  { create } from 'zustand';
 
-export const useScrollStore = create((set) => ({
-  isSectionScrolled: false,
-  setSectionScrolled: (value: any) => set({ isSectionScrolled: value }),
+interface State {
+  activeLink: string | null;
+  setActiveLink: (activeLink: string | null) => void;
+}
+
+export const useStore = create<State>((set) => ({
+  activeLink: 'section-1', // Initial active link
+  setActiveLink: (activeLink) => set({ activeLink }),
 }));
-
-export const navLinkActive = create((set) => ({
-  isNavActive : false
-}))
